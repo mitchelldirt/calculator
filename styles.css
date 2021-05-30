@@ -1,0 +1,17 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 2fr, repeat(5, 1fr);
+  grid-template-areas:
+    output output output output
+    output output output output
+    clear positiveNegative percent division
+    seven eight nine multiplication
+    four five six minus
+    one two three plus
+    numberZero numberZero changeToDecimal equals;
+}
+
+.output {
+    grid-area: output;
+}
