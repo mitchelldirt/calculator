@@ -1,91 +1,94 @@
-#grid {
+#calculator-grid {
   display: grid;
-  grid-template:
-    "output output output output" 1fr
-    "output output output output" 1fr
-    "clear positiveNegative percent division" 1fr
-    "seven eight nine multiplication" 1fr
-    "four five six minus" 1fr
-    "one two three plus" 1fr
-    "numberZero numberZero changeToDecimal equals" 2fr / 1fr 1fr;
+  width: 50%;
+  height: 50%;
+  grid-template-areas: "output output output output"
+    "output output output output"
+    "clear positiveNegative percent division"
+    "seven eight nine multiplication"
+    "four five six minus"
+    "one two three plus"
+    "numberZero numberZero changeToDecimal equals";
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(7, 1fr);
 }
 
-.output {
+#output {
   grid-area: output;
 }
 
-.clear {
+#clear {
   grid-area: clear;
 }
 
-.positiveNegative {
+#positiveNegative {
   grid-area: positiveNegative;
 }
 
-.percent {
+#percent {
   grid-area: percent;
 }
 
-.division {
+#division {
   grid-area: division;
 }
 
-.seven {
+#seven {
   grid-area: seven;
 }
 
-.eight {
+#eight {
   grid-area: eight;
 }
 
-.nine {
+#nine {
   grid-area: nine;
 }
 
-.multiplication {
+#multiplication {
   grid-area: multiplication;
 }
 
-.four {
+#four {
   grid-area: four;
 }
 
-.five {
+#five {
   grid-area: five;
 }
 
-.six {
+#six {
   grid-area: six;
 }
 
-.minus {
+#minus {
   grid-area: minus;
 }
 
-.one {
+#one {
   grid-area: one;
 }
 
-.two {
+#two {
   grid-area: two;
 }
 
-.three {
+#three {
   grid-area: three;
 }
 
-.plus {
+#plus {
   grid-area: plus;
 }
 
-.numberZero {
+#numberZero {
   grid-area: numberZero;
 }
 
-.changeToDecimal {
+#changeToDecimal {
   grid-area: changeToDecimal;
 }
 
-.equals {
+#equals {
   grid-area: equals;
 }
