@@ -1,25 +1,19 @@
-const inputBox = document.getElementById('output');
-const clearButton = document.getElementById('clear');
-const buttons = document.getElementsByTagName('button');
+const inputBox = document.getElementById("output");
+const clearButton = document.getElementById("clear");
+const buttons = document.getElementsByTagName("button");
 
-function numberButtons() {
-    const zero = document.getElementById('numberZero')
-    const one = document.getElementById('one')
-    const two = document.getElementById('two')
-    const three = document.getElementById('three')
-    const four = document.getElementById('four')
-    const five = document.getElementById('five')
-    const six = document.getElementById('six')
-    const seven = document.getElementById('seven')
-    const eight = document.getElementById('eight')
-    const nine = document.getElementById('nine')
-
+// Adds an event listener to each number button to display it's number value
+for (let i = 0; i < buttons.length - 9; i++) {
+    buttons[i].addEventListener('click', () => {
+        inputBox.value += i;
+    })
 }
-clearButton.addEventListener('click', clearInput)
+
+clearButton.addEventListener("click", clearInput)
 
 function clearInput() {
-    const inputBox = document.getElementById('output');
-    inputBox.value = ''
+    const inputBox = document.getElementById("output");
+    inputBox.value = ""
 }
 
 function add(x, y) {
@@ -39,15 +33,15 @@ function divide(x, y) {
 }
 
 function operate(operator, x, y) {
-    if (operator === '+') {
+    if (operator === "+") {
         return add(x, y);
-    } else if (operator === '-') {
+    } else if (operator === "-") {
         return subtract(x, y);
-    } else if (operator === '*') {
+    } else if (operator === "*") {
         return multiply(x, y);
-    } else if (operator === '/') {
+    } else if (operator === "/") {
         return divide(x, y);
     } else {
-        console.log('The operate function has failed.');
+        console.log("The operate function has failed.");
     }
 }
