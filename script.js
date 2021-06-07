@@ -4,10 +4,17 @@ const buttons = document.getElementsByTagName("button");
 const positiveNegative = document.getElementById("positiveNegative");
 const percent = document.getElementById("percent");
 const decimal = document.getElementById("changeToDecimal");
+const addition = document.getElementById("plus");
+const equals = document.getElementById("equals");
+let firstNumber;
+let operator;
 
 clearButton.addEventListener("click", clearInput)
 decimal.addEventListener("click", toDecimal);
 positiveNegative.addEventListener("click", positiveToNegative);
+percent.addEventListener("click", toPercentValue);
+addition.addEventListener("click", plus);
+equals.addEventListener("click", operate);
 
 // Adds an event listener to each number button to display it's number value
 for (let i = 0; i < buttons.length - 9; i++) {
@@ -45,15 +52,34 @@ function toDecimal() {
 
 // Changes numbers to percents in decimal form eg: 5 = .05 && 500 = 5
 function toPercentValue() {
-
+    if (inputBox.value.length === 0) {
+        return;
+    } else if (inputBox.value.length === 1) {
+        inputBox.value = ".0" + inputBox.value;
+    } else {
+        numberArray = inputBox.value.split("");
+        numberArray.splice(-2, 0, ".");
+        inputBox.value = numberArray.join("")
+    }
 }
 
 function clearInput() {
     inputBox.value = ""
 }
 
+function storeDisplayNumber() {
+    firstNumber = inputBox.value;
+    inputBox.value = "";
+}
+
+function plus() {
+    operator = "+";
+    return operator;
+}
+
 function add(x, y) {
-    return x + y;
+    output = x + y;
+    inputBox.value = output;
 }
 
 function subtract(x, y) {
@@ -69,6 +95,8 @@ function divide(x, y) {
 }
 
 function operate(operator, x, y) {
+    x = parseFloat(firstNumber);
+    y = parseFloat(inputBox.value);
     if (operator === "+") {
         return add(x, y);
     } else if (operator === "-") {
