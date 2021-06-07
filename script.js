@@ -6,7 +6,7 @@ const percent = document.getElementById("percent");
 const decimal = document.getElementById("changeToDecimal");
 const addition = document.getElementById("plus");
 const equals = document.getElementById("equals");
-let firstNumber;
+let previousNumber;
 let operator;
 
 clearButton.addEventListener("click", clearInput)
@@ -68,7 +68,7 @@ function clearInput() {
 }
 
 function storeDisplayNumber() {
-    firstNumber = inputBox.value;
+    previousNumber = inputBox.value;
     inputBox.value = "";
 }
 
@@ -94,8 +94,10 @@ function divide(x, y) {
     return x / y;
 }
 
+//TODO: Make the initial value of previousNumber Zero then every time you click an operation change the value of previousNumber to that number and add the current display value to it. 
+
 function operate(operator, x, y) {
-    x = parseFloat(firstNumber);
+    x = parseFloat(previousNumber);
     y = parseFloat(inputBox.value);
     if (operator === "+") {
         return add(x, y);
