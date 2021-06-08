@@ -6,14 +6,14 @@ const percent = document.getElementById("percent");
 const decimal = document.getElementById("changeToDecimal");
 const addition = document.getElementById("plus");
 const equals = document.getElementById("equals");
-let previousNumber;
+let previousNumber = 0;
 let operator;
 
 clearButton.addEventListener("click", clearInput)
 decimal.addEventListener("click", toDecimal);
 positiveNegative.addEventListener("click", positiveToNegative);
 percent.addEventListener("click", toPercentValue);
-addition.addEventListener("click", plus);
+addition.addEventListener("click", add);
 equals.addEventListener("click", operate);
 
 // Adds an event listener to each number button to display it's number value
@@ -72,14 +72,12 @@ function storeDisplayNumber() {
     inputBox.value = "";
 }
 
-function plus() {
-    operator = "+";
-    return operator;
-}
-
 function add(x, y) {
-    output = x + y;
-    inputBox.value = output;
+    x = previousNumber;
+    y = inputBox.value;
+    inputBox.value = "";
+    inputBox.value = parseFloat(x) + parseFloat(y);
+    previousNumber = y;
 }
 
 function subtract(x, y) {
@@ -94,7 +92,8 @@ function divide(x, y) {
     return x / y;
 }
 
-//TODO: Make the initial value of previousNumber Zero then every time you click an operation change the value of previousNumber to that number and add the current display value to it. 
+/*TODO: Make the initial value of previousNumber Zero then every time you click an operation change the value of 
+previousNumber to that number and add the current display value to it. */
 
 function operate(operator, x, y) {
     x = parseFloat(previousNumber);
