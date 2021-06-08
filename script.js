@@ -6,6 +6,9 @@ const percent = document.getElementById("percent");
 const decimal = document.getElementById("changeToDecimal");
 const addition = document.getElementById("plus");
 const equals = document.getElementById("equals");
+const subtraction = document.getElementById("minus");
+const multiplication = document.getElementById("multiplication");
+const division = document.getElementById("division");
 let previousNumber = 0;
 let currentNumber = 0;
 let howManyOperations = 0;
@@ -17,6 +20,10 @@ positiveNegative.addEventListener("click", positiveToNegative);
 percent.addEventListener("click", toPercentValue);
 addition.addEventListener("click", add);
 equals.addEventListener("click", operate);
+subtraction.addEventListener("click", subtract);
+multiplication.addEventListener("click", multiply);
+division.addEventListener("click", divide);
+
 
 // Adds an event listener to each number button to display it's number value
 for (let i = 0; i < buttons.length - 9; i++) {
@@ -106,15 +113,90 @@ function add(x, y) {
 }
 
 function subtract(x, y) {
-    return x - y;
+    storeDisplayNumber();
+    if (howManyOperations === 1) {
+        x = parseFloat(previousNumber);
+        y = parseFloat(inputBox.value);
+        if (y === NaN) {
+            y = parseFloat(0);
+        }
+        currentNumber = parseFloat(x) - parseFloat(y);
+        previousNumber = currentNumber;
+        inputBox.value = "";
+    } else if (howManyOperations > 1) {
+        x = parseFloat(previousNumber);
+        y = parseFloat(inputBox.value);
+        console.log(typeof (y));
+        console.log(y);
+        if (isNaN(y) === true) {
+            y = parseFloat(0);
+        }
+        inputBox.value = previousNumber;
+        currentNumber = parseFloat(x) - parseFloat(y);
+        previousNumber = currentNumber;
+        inputBox.value = "";
+        inputBox.placeholder = currentNumber;
+    } else {
+        return;
+    }
 }
 
 function multiply(x, y) {
-    return x * y;
+    storeDisplayNumber();
+    if (howManyOperations === 1) {
+        x = parseFloat(previousNumber);
+        y = parseFloat(inputBox.value);
+        if (y === NaN) {
+            y = parseFloat(0);
+        }
+        currentNumber = parseFloat(x) * parseFloat(y);
+        previousNumber = currentNumber;
+        inputBox.value = "";
+    } else if (howManyOperations > 1) {
+        x = parseFloat(previousNumber);
+        y = parseFloat(inputBox.value);
+        console.log(typeof (y));
+        console.log(y);
+        if (isNaN(y) === true) {
+            y = parseFloat(0);
+        }
+        inputBox.value = previousNumber;
+        currentNumber = parseFloat(x) * parseFloat(y);
+        previousNumber = currentNumber;
+        inputBox.value = "";
+        inputBox.placeholder = currentNumber;
+    } else {
+        return;
+    }
 }
 
 function divide(x, y) {
-    return x / y;
+    storeDisplayNumber();
+    if (howManyOperations === 1) {
+        x = parseFloat(previousNumber);
+        y = parseFloat(inputBox.value);
+        if (y === NaN) {
+            y = parseFloat(0);
+        }
+        currentNumber = parseFloat(x) / parseFloat(y);
+        previousNumber = currentNumber;
+        inputBox.value = "";
+    } else if (howManyOperations > 1) {
+        x = parseFloat(previousNumber);
+        y = parseFloat(inputBox.value);
+        console.log(typeof (y));
+        console.log(y);
+        if (isNaN(y) === true) {
+            y = parseFloat(0);
+        }
+        inputBox.value = previousNumber;
+        currentNumber = parseFloat(x) / parseFloat(y);
+        previousNumber = currentNumber;
+        inputBox.value = "";
+        inputBox.placeholder = currentNumber;
+    } else {
+        return;
+    }
 }
 
 /*TODO: Make the initial value of previousNumber Zero then every time you click an operation change the value of 
