@@ -7,6 +7,8 @@ const decimal = document.getElementById("changeToDecimal");
 const addition = document.getElementById("plus");
 const equals = document.getElementById("equals");
 let previousNumber = 0;
+let currentNumber = 0;
+let howManyOperations = 0;
 let operator;
 
 clearButton.addEventListener("click", clearInput)
@@ -64,20 +66,43 @@ function toPercentValue() {
 }
 
 function clearInput() {
-    inputBox.value = ""
+    inputBox.value = "";
+    inputBox.placeholder = "";
+    previousNumber = 0;
+    howManyOperations = 0;
 }
 
 function storeDisplayNumber() {
-    previousNumber = inputBox.value;
-    inputBox.value = "";
+    howManyOperations += 1;
 }
 
 function add(x, y) {
-    x = previousNumber;
-    y = inputBox.value;
-    inputBox.value = "";
-    inputBox.value = parseFloat(x) + parseFloat(y);
-    previousNumber = y;
+    storeDisplayNumber();
+    if (howManyOperations === 1) {
+        x = parseFloat(previousNumber);
+        y = parseFloat(inputBox.value);
+        if (y === NaN) {
+            y = parseFloat(0);
+        }
+        currentNumber = parseFloat(x) + parseFloat(y);
+        previousNumber = currentNumber;
+        inputBox.value = "";
+    } else if (howManyOperations > 1) {
+        x = parseFloat(previousNumber);
+        y = parseFloat(inputBox.value);
+        console.log(typeof (y));
+        console.log(y);
+        if (isNaN(y) === true) {
+            y = parseFloat(0);
+        }
+        inputBox.value = previousNumber;
+        currentNumber = parseFloat(x) + parseFloat(y);
+        previousNumber = currentNumber;
+        inputBox.value = "";
+        inputBox.placeholder = currentNumber;
+    } else {
+        return;
+    }
 }
 
 function subtract(x, y) {
@@ -95,18 +120,10 @@ function divide(x, y) {
 /*TODO: Make the initial value of previousNumber Zero then every time you click an operation change the value of 
 previousNumber to that number and add the current display value to it. */
 
-function operate(operator, x, y) {
-    x = parseFloat(previousNumber);
-    y = parseFloat(inputBox.value);
-    if (operator === "+") {
-        return add(x, y);
-    } else if (operator === "-") {
-        return subtract(x, y);
-    } else if (operator === "*") {
-        return multiply(x, y);
-    } else if (operator === "/") {
-        return divide(x, y);
+function operate() {
+    if (inputBox.value === "" || inputBox.value === "0") {
+        inputBox.value = currentNumber;
     } else {
-        console.log("The operate function has failed.");
+        add()
     }
 }
