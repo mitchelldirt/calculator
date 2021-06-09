@@ -1,3 +1,11 @@
+/* TODO: 
+1. Round out decimal points to the hundredth decimal place.
+2. Test out a bunch of different equations using decimal points and the percent button to make sure everything is working correctly.
+3. Add in a backspace button.
+4. Add in keyboard support and disable the typing in the text box.
+5. Organize and comment all of your code.
+6. CSS Time baby.
+*/
 const inputBox = document.getElementById("output");
 const clearButton = document.getElementById("clear");
 const buttons = document.getElementsByTagName("button");
@@ -12,27 +20,31 @@ const division = document.getElementById("division");
 let currentNumber = 0;
 let operator = 0;
 let displayedNumber = 0;
+let midOperation = false;
 
 clearButton.addEventListener("click", clearInput)
 decimal.addEventListener("click", toDecimal);
 positiveNegative.addEventListener("click", positiveToNegative);
 percent.addEventListener("click", toPercentValue);
 equals.addEventListener("click", grabNumbers);
+equals.addEventListener("click", () => {
+    midOperation = false;
+})
 
-/*addition.addEventListener("click", add);
+addition.addEventListener("click", grabNumbers);
 addition.addEventListener("click", () => {
     operator = 1;
 })
 
-subtraction.addEventListener("click", subtract);
+subtraction.addEventListener("click", grabNumbers);
 subtraction.addEventListener("click", () => {
     operator = 2;
 })
 
-multiplication.addEventListener("click", multiply);
+multiplication.addEventListener("click", grabNumbers);
 multiplication.addEventListener("click", () => {
     operator = 3;
-}) */
+})
 
 division.addEventListener("click", grabNumbers);
 division.addEventListener("click", () => {
@@ -90,6 +102,7 @@ function clearInput() {
     inputBox.value = "";
     inputBox.placeholder = "";
     currentNumber = 0;
+    midOperation = false;
 }
 
 function emptyInputBox() {
@@ -97,29 +110,71 @@ function emptyInputBox() {
 }
 
 function grabNumbers() {
-    if (currentNumber === 0) {
+    if (inputBox.value === "") {
+        return;
+    } else if (midOperation === false && inputBox.placeholder === "") {
         currentNumber = inputBox.value
         emptyInputBox();
+        midOperation = true;
+        return;
+    } else if (midOperation === false && inputBox.placeholder !== "") {
+        currentNumber = inputBox.placeholder;
+        midOperation = true;
         return;
     } else {
         displayedNumber = inputBox.value;
         operate();
+
     }
 }
+
+function add(x, y) {
+    x = parseFloat(x);
+    y = parseFloat(y);
+    let result = x + y;
+    currentNumber = result;
+    inputBox.value = "";
+    inputBox.placeholder = result;
+}
+
+
+function subtract(x, y) {
+    x = parseFloat(x);
+    y = parseFloat(y);
+    let result = x - y;
+    currentNumber = result;
+    inputBox.value = "";
+    inputBox.placeholder = result;
+}
+
+
+function multiply(x, y) {
+    x = parseFloat(x);
+    y = parseFloat(y);
+    let result = x * y;
+    currentNumber = result;
+    inputBox.value = "";
+    inputBox.placeholder = result;
+}
+
 
 function divide(x, y) {
     x = parseFloat(x);
     y = parseFloat(y);
     if (y === 0) {
-        return "You can't divide by zero >:(";
+        clearInput();
+        inputBox.placeholder = "You can't divide by zero >:(";
+        setTimeout(function () {
+            inputBox.placeholder = "";
+        }, 3000);
+        grabNumbers();
     } else {
         let result = x / y;
-        inputBox.value = result;
+        currentNumber = result;
+        inputBox.value = "";
+        inputBox.placeholder = result;
     }
 }
-
-/*TODO: Make the initial value of previousNumber Zero then every time you click an operation change the value of 
-previousNumber to that number and add the current display value to it. */
 
 function operate() {
     if (currentNumber === "" || currentNumber === "0") {
@@ -127,13 +182,13 @@ function operate() {
     } else {
         switch (operator) {
             case 1:
-                add()
+                add(currentNumber, displayedNumber)
                 break;
             case 2:
-                subtract();
+                subtract(currentNumber, displayedNumber);
                 break;
             case 3:
-                multiply();
+                multiply(currentNumber, displayedNumber);
                 break;
             case 4:
                 divide(currentNumber, displayedNumber);
