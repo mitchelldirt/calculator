@@ -9,21 +9,35 @@ const equals = document.getElementById("equals");
 const subtraction = document.getElementById("minus");
 const multiplication = document.getElementById("multiplication");
 const division = document.getElementById("division");
-let previousNumber = 0;
 let currentNumber = 0;
-let howManyOperations = 0;
-let operator;
+let operator = 0;
+let displayedNumber = 0;
 
 clearButton.addEventListener("click", clearInput)
 decimal.addEventListener("click", toDecimal);
 positiveNegative.addEventListener("click", positiveToNegative);
 percent.addEventListener("click", toPercentValue);
-addition.addEventListener("click", add);
-equals.addEventListener("click", operate);
-subtraction.addEventListener("click", subtract);
-multiplication.addEventListener("click", multiply);
-division.addEventListener("click", divide);
+equals.addEventListener("click", grabNumbers);
 
+/*addition.addEventListener("click", add);
+addition.addEventListener("click", () => {
+    operator = 1;
+})
+
+subtraction.addEventListener("click", subtract);
+subtraction.addEventListener("click", () => {
+    operator = 2;
+})
+
+multiplication.addEventListener("click", multiply);
+multiplication.addEventListener("click", () => {
+    operator = 3;
+}) */
+
+division.addEventListener("click", grabNumbers);
+division.addEventListener("click", () => {
+    operator = 4;
+})
 
 // Adds an event listener to each number button to display it's number value
 for (let i = 0; i < buttons.length - 9; i++) {
@@ -75,127 +89,32 @@ function toPercentValue() {
 function clearInput() {
     inputBox.value = "";
     inputBox.placeholder = "";
-    previousNumber = 0;
-    howManyOperations = 0;
+    currentNumber = 0;
 }
 
-function storeDisplayNumber() {
-    howManyOperations += 1;
+function emptyInputBox() {
+    inputBox.value = "";
 }
 
-function add(x, y) {
-    storeDisplayNumber();
-    if (howManyOperations === 1) {
-        x = parseFloat(previousNumber);
-        y = parseFloat(inputBox.value);
-        if (y === NaN) {
-            y = parseFloat(0);
-        }
-        currentNumber = parseFloat(x) + parseFloat(y);
-        previousNumber = currentNumber;
-        inputBox.value = "";
-    } else if (howManyOperations > 1) {
-        x = parseFloat(previousNumber);
-        y = parseFloat(inputBox.value);
-        console.log(typeof (y));
-        console.log(y);
-        if (isNaN(y) === true) {
-            y = parseFloat(0);
-        }
-        inputBox.value = previousNumber;
-        currentNumber = parseFloat(x) + parseFloat(y);
-        previousNumber = currentNumber;
-        inputBox.value = "";
-        inputBox.placeholder = currentNumber;
-    } else {
+function grabNumbers() {
+    if (currentNumber === 0) {
+        currentNumber = inputBox.value
+        emptyInputBox();
         return;
-    }
-}
-
-function subtract(x, y) {
-    storeDisplayNumber();
-    if (howManyOperations === 1) {
-        x = parseFloat(previousNumber);
-        y = parseFloat(inputBox.value);
-        if (y === NaN) {
-            y = parseFloat(0);
-        }
-        currentNumber = parseFloat(x) - parseFloat(y);
-        previousNumber = currentNumber;
-        inputBox.value = "";
-    } else if (howManyOperations > 1) {
-        x = parseFloat(previousNumber);
-        y = parseFloat(inputBox.value);
-        console.log(typeof (y));
-        console.log(y);
-        if (isNaN(y) === true) {
-            y = parseFloat(0);
-        }
-        inputBox.value = previousNumber;
-        currentNumber = parseFloat(x) - parseFloat(y);
-        previousNumber = currentNumber;
-        inputBox.value = "";
-        inputBox.placeholder = currentNumber;
     } else {
-        return;
-    }
-}
-
-function multiply(x, y) {
-    storeDisplayNumber();
-    if (howManyOperations === 1) {
-        x = parseFloat(previousNumber);
-        y = parseFloat(inputBox.value);
-        if (y === NaN) {
-            y = parseFloat(0);
-        }
-        currentNumber = parseFloat(x) * parseFloat(y);
-        previousNumber = currentNumber;
-        inputBox.value = "";
-    } else if (howManyOperations > 1) {
-        x = parseFloat(previousNumber);
-        y = parseFloat(inputBox.value);
-        console.log(typeof (y));
-        console.log(y);
-        if (isNaN(y) === true) {
-            y = parseFloat(0);
-        }
-        inputBox.value = previousNumber;
-        currentNumber = parseFloat(x) * parseFloat(y);
-        previousNumber = currentNumber;
-        inputBox.value = "";
-        inputBox.placeholder = currentNumber;
-    } else {
-        return;
+        displayedNumber = inputBox.value;
+        operate();
     }
 }
 
 function divide(x, y) {
-    storeDisplayNumber();
-    if (howManyOperations === 1) {
-        x = parseFloat(previousNumber);
-        y = parseFloat(inputBox.value);
-        if (y === NaN) {
-            y = parseFloat(0);
-        }
-        currentNumber = parseFloat(x) / parseFloat(y);
-        previousNumber = currentNumber;
-        inputBox.value = "";
-    } else if (howManyOperations > 1) {
-        x = parseFloat(previousNumber);
-        y = parseFloat(inputBox.value);
-        console.log(typeof (y));
-        console.log(y);
-        if (isNaN(y) === true) {
-            y = parseFloat(0);
-        }
-        inputBox.value = previousNumber;
-        currentNumber = parseFloat(x) / parseFloat(y);
-        previousNumber = currentNumber;
-        inputBox.value = "";
-        inputBox.placeholder = currentNumber;
+    x = parseFloat(x);
+    y = parseFloat(y);
+    if (y === 0) {
+        return "You can't divide by zero >:(";
     } else {
-        return;
+        let result = x / y;
+        inputBox.value = result;
     }
 }
 
@@ -203,9 +122,24 @@ function divide(x, y) {
 previousNumber to that number and add the current display value to it. */
 
 function operate() {
-    if (inputBox.value === "" || inputBox.value === "0") {
+    if (currentNumber === "" || currentNumber === "0") {
         inputBox.value = currentNumber;
     } else {
-        add()
+        switch (operator) {
+            case 1:
+                add()
+                break;
+            case 2:
+                subtract();
+                break;
+            case 3:
+                multiply();
+                break;
+            case 4:
+                divide(currentNumber, displayedNumber);
+                break;
+            default:
+                inputBox.placeholder = "An Error Has Ocurred :("
+        }
     }
 }
