@@ -11,11 +11,11 @@ html {
   grid-template-areas:
     "output output output output"
     "output output output output"
-    "clear positiveNegative percent division"
+    "clear delete positiveNegative division"
     "seven eight nine multiplication"
     "four five six minus"
     "one two three plus"
-    "numberZero numberZero changeToDecimal equals";
+    "numberZero percent changeToDecimal equals";
 }
 
 #output {
