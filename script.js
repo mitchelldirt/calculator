@@ -1,11 +1,9 @@
 /* TODO: 
-1. Round out decimal points to the hundredth decimal place. DONE
-2. Test out a bunch of different equations using decimal points and the percent button to make sure everything is working correctly. DONE
-3. Add in a backspace button. DONE
-4. Add in keyboard support and disable the typing in the text box.
-5. Make sure numbers can't extend past input box
-6. Organize and comment all of your code.
-7. CSS Time baby.
+1. Add in keyboard support and disable the typing in the text box.
+2. Make sure numbers can't extend past input box
+3. Add commas into numbers when they reach 1000
+4. Organize and comment all of your code.
+5. CSS Time baby.
 */
 const inputBox = document.getElementById("output");
 const clearButton = document.getElementById("clear");
