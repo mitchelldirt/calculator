@@ -1,7 +1,5 @@
 /* TODO: 
 1. Add in keyboard support and disable the typing in the text box.
-2. Make sure numbers can't extend past input box
-3. Add commas into numbers when they reach 1000
 4. Organize and comment all of your code.
 5. CSS Time baby.
 */
@@ -31,6 +29,12 @@ equals.addEventListener("click", grabNumbers);
 equals.addEventListener("click", () => {
     midOperation = false;
 });
+
+inputBox.addEventListener("input", () => {
+    if (inputBox.value === 10) {
+
+    }
+})
 
 addition.addEventListener("click", grabNumbers);
 addition.addEventListener("click", () => {
