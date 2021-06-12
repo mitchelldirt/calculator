@@ -5,7 +5,7 @@
 4. Change the colors
 5. Add your media queries
 */
-@import url('https://fonts.googleapis.com/css2?family=Poller+One&family=Share+Tech+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poller+One&family=Share+Tech+Mono&display=swap");
 :root {
   --orange-btn: #ff9e0a;
   --lightGray-btn: #a5a5a5;
@@ -22,27 +22,28 @@ button {
   justify-self: center;
   color: white;
   font-size: 1.5em;
-  font-family: 'Share Tech Mono', Georgia, 'Times New Roman', Times, serif;
+  font-family: "Share Tech Mono", Georgia, "Times New Roman", Times, serif;
 }
 
 html {
   background-color: whitesmoke;
   overflow: hidden;
-  font-family: 'Poller One', Georgia, 'Times New Roman', Times, serif;
+  font-family: "Poller One", Georgia, "Times New Roman", Times, serif;
 }
 
-.main-grid {
-  display: flex
-
+#mainGrid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #legend1 {
-  visibility: hidden;
+  display: none;
 }
 
 #legend2 {
-  visibility: hidden;
-  color: white
+  display: none;
+  color: white;
 }
 #calculator-grid {
   background-color: black;
@@ -70,6 +71,7 @@ html {
   color: var(--orange-btn);
   font-size: 1.75em;
   line-height: 0px;
+  text-align: center;
 }
 
 #output {
@@ -85,7 +87,7 @@ html {
   word-break: break-all;
   border: black;
   line-break: loose;
-  font-family: 'Share Tech Mono', Georgia, 'Times New Roman', Times, serif;
+  font-family: "Share Tech Mono", Georgia, "Times New Roman", Times, serif;
 }
 
 #clear {
