@@ -23,6 +23,17 @@ button {
   color: white;
   font-size: 1.5em;
   font-family: "Share Tech Mono", Georgia, "Times New Roman", Times, serif;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  box-shadow: 0 1px #666;
+  transform: translateY(1px);
 }
 
 html {
@@ -32,6 +43,7 @@ html {
 }
 
 #mainGrid {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,7 +63,7 @@ html {
   border-radius: 25px;
   display: grid;
   width: 300px;
-  height: 550px;
+  height: 500px;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(7, 1fr);
   grid-template-areas:
@@ -79,7 +91,9 @@ html {
   direction: ltr;
   text-align: right;
   width: 100%;
-  bottom: 15px;
+  height: 100%;
+  line-height: 15px;
+  bottom: 10px;
   position: relative;
   background-color: black;
   color: white;
