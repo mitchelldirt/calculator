@@ -1,6 +1,3 @@
-/* TODO: 
-4. Organize and comment all of your code.
-*/
 const inputBox = document.getElementById("output");
 const clearButton = document.getElementById("clear");
 const buttons = document.getElementsByTagName("button");
@@ -13,6 +10,7 @@ const subtraction = document.getElementById("minus");
 const multiplication = document.getElementById("multiplication");
 const division = document.getElementById("division");
 const deleteButton = document.getElementById("delete");
+
 let currentNumber = 0;
 let operator = 0;
 let displayedNumber = 0;
@@ -24,45 +22,49 @@ decimal.addEventListener("click", toDecimal);
 positiveNegative.addEventListener("click", positiveToNegative);
 percent.addEventListener("click", toPercentValue);
 equals.addEventListener("click", grabNumbers);
+
+// equals sets midOperation to false so that a new number can be assigned to `displayedNumber`.
 equals.addEventListener("click", () => {
     midOperation = false;
 });
 
+/* The operator is set before `grabNumbers()` is called. If this wasn't the case `operator` would equal 0 
+and the first time you click the button on page load it wouldn't work. */
 addition.addEventListener("click", () => {
     operator = 1;
-})
+});
 addition.addEventListener("click", grabNumbers);
 
 
 subtraction.addEventListener("click", () => {
     operator = 2;
-})
+});
 subtraction.addEventListener("click", grabNumbers);
 
 
 multiplication.addEventListener("click", () => {
     operator = 3;
-})
+});
 multiplication.addEventListener("click", grabNumbers);
 
 division.addEventListener("click", () => {
     operator = 4;
-})
+});
 division.addEventListener("click", grabNumbers);
 
 
-// Adds an event listener to each number button to display it's number value
+// Adds an event listener to each number button to display it's number value.
 for (let i = 0; i < buttons.length - 10; i++) {
-    buttons[i].addEventListener('click', () => {
+    buttons[i].addEventListener("click", () => {
         if (inputBox.value.length === 10) {
             inputBox.value += "";
         } else {
             inputBox.value += i;
         }
     })
-}
+};
 
-// Function to make numbers positive or negative
+// Adds a '-' if there is none. If there is a '-' the functions removes it.
 function positiveToNegative() {
     let zeroIndex = inputBox.value[0];
     let negative = "-";
@@ -71,16 +73,16 @@ function positiveToNegative() {
     } else {
         inputBox.value = inputBox.value.slice(1);
     }
-}
+};
 
-// This removes the last character in the input box value field.
+// Removes the last character of `inputBox.value`.
 function backSpace() {
     oldInputBox = inputBox.value;
     newValue = oldInputBox.substring(0, oldInputBox.length - 1);
     inputBox.value = newValue;
-}
+};
 
-// Function that adds a decimal point into the number being input
+// Adds a decimal point to the last index position of `inputBox.value`.
 function toDecimal() {
     isDecimal = inputBox.value.includes(".");
     if (isDecimal === true) {
@@ -93,104 +95,91 @@ function toDecimal() {
     } else {
         alert("An error related to the decimal point button has occurred");
     }
-}
+};
 
 // Changes numbers to percents in decimal form eg: 5 = .05 && 500 = 5
-function toPercentValue() {
-    isDecimal = inputBox.value.includes(".");
-    if (inputBox.value.length === 0) {
-        return;
-    } else if (inputBox.value.length === 1 && isDecimal === false) {
-        inputBox.value = "." + "0" + inputBox.value;
-    } else if (inputBox.value.length === 2 && isDecimal === false) {
-        inputBox.value = "." + inputBox.value;
-    } else if (inputBox.value.length > 2 && isDecimal === false) {
-        numberArray = inputBox.value.split("");
-        numberArray.splice(-2, 0, ".");
-        inputBox.value = numberArray.join("");
+function toPercentValue(x, y) {
+    if (inputBox.value === "") {
+        x = currentNumber;
+        y = 100;
     } else {
-        numberArray = inputBox.value.split("");
-        let indexOfDecimalPoint = numberArray.indexOf(".");
-
-        if (indexOfDecimalPoint === 0) {
-            numberArray.splice(1, 0, "0", "0");
-            inputBox.value = numberArray.join("");
-        } else if (indexOfDecimalPoint === 1) {
-            delete numberArray[indexOfDecimalPoint];
-            inputBox.value = ".0" + numberArray.join("");
-        } else {
-            delete numberArray[indexOfDecimalPoint];
-            numberArray.splice(indexOfDecimalPoint - 2, 0, ".");
-            inputBox.value = numberArray.join("");
-        }
+        x = parseFloat(inputBox.value);
+        y = 100;
     }
-}
+    result = x / y;
+    result = Math.round((result + Number.EPSILON) * 100000) / 100000;
+    inputBox.value = result;
+};
 
 function clearInput() {
     inputBox.value = "";
     inputBox.placeholder = "";
     currentNumber = 0;
     midOperation = false;
-}
+};
 
+// unlike the above `clearInput()` this function simply gets rid of any characters in `inputBox`.
 function emptyInputBox() {
     inputBox.value = "";
-}
+};
 
+// Sets currentNumber and displayedNumber to be used in `operate()`.
 function grabNumbers() {
     if (inputBox.value === "" && inputBox.placeholder === "" && operator === 0) {
-        return;
+        return; // When nothing has been entered.
     } else if (midOperation === false && operator === 0) {
-        return;
+        return; // When hitting equal while a number appears without hitting an operator nothing happens.
     } else if (midOperation === false && inputBox.placeholder === "") {
-        currentNumber = inputBox.value
+        currentNumber = inputBox.value;
         emptyInputBox();
         midOperation = true;
-        return;
+        return; // Sets the displayed number to be the current number. Next operation or equal sign will `operate()`.
     } else if (midOperation === false && inputBox.placeholder !== "") {
         currentNumber = inputBox.placeholder;
         midOperation = true;
-        return;
+        return; /* Sets the returned value from hitting equal to `currentNumber`. 
+        Next operation or equal sign will `operate()`. */
     } else if (midOperation === true && inputBox.value === "") {
         displayedNumber = currentNumber;
-        operate();
+        operate(); // Will `operate()` if user doesn't provide second number. eg: number -> operator -> equals button.
     } else {
         displayedNumber = inputBox.value;
         operate();
     }
-}
+};
 
+// All of the operator functions below will round to the 5th decimal place. eg: .00005
 function add(x, y) {
     x = parseFloat(x);
     y = parseFloat(y);
     let result = x + y;
-    result = Math.round((result + Number.EPSILON) * 100) / 100;
+    result = Math.round((result + Number.EPSILON) * 100000) / 100000;
     currentNumber = result;
     inputBox.value = "";
     inputBox.placeholder = result;
-}
+};
 
 
 function subtract(x, y) {
     x = parseFloat(x);
     y = parseFloat(y);
     let result = x - y;
-    result = Math.round((result + Number.EPSILON) * 100) / 100;
+    result = Math.round((result + Number.EPSILON) * 100000) / 100000;
     currentNumber = result;
     inputBox.value = "";
     inputBox.placeholder = result;
-}
+};
 
 
 function multiply(x, y) {
     x = parseFloat(x);
     y = parseFloat(y);
     let result = x * y;
-    result = Math.round((result + Number.EPSILON) * 100) / 100;
+    result = Math.round((result + Number.EPSILON) * 100000) / 100000;
     currentNumber = result;
     inputBox.value = "";
     inputBox.placeholder = result;
-}
+};
 
 
 function divide(x, y) {
@@ -205,22 +194,23 @@ function divide(x, y) {
         grabNumbers();
     } else {
         let result = x / y;
-        result = Math.round((result + Number.EPSILON) * 100) / 100;
+        result = Math.round((result + Number.EPSILON) * 100000) / 100000;
         currentNumber = result;
         inputBox.value = "";
         inputBox.placeholder = result;
     }
-}
+};
 
+// Decides which operator function to run based on the `operator` variable.
 function operate() {
     if (currentNumber === "" || currentNumber === "0" || displayedNumber === "") {
         inputBox.placeholder = currentNumber;
     } else {
         switch (operator) {
             case 0:
-                return;
+                return; // If `operator` === 0 and user hits `equals` will do nothing. 
             case 1:
-                add(currentNumber, displayedNumber)
+                add(currentNumber, displayedNumber);
                 break;
             case 2:
                 subtract(currentNumber, displayedNumber);
@@ -232,11 +222,12 @@ function operate() {
                 divide(currentNumber, displayedNumber);
                 break;
             default:
-                inputBox.placeholder = "An Error Has Ocurred :("
+                inputBox.placeholder = "An Error Has Ocurred :(";
         }
     }
-}
+};
 
+// Sets all of the keyboard inputs.
 window.addEventListener("keydown", function (event) {
     if (event.defaultPrevented) {
         return; // Do nothing if event already handled
