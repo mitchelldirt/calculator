@@ -20,7 +20,8 @@ html {
 
 #output {
   grid-area: output;
-  direction: rtl;
+  direction: ltr;
+  text-align: right;
 }
 
 #clear {

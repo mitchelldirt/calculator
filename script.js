@@ -53,7 +53,11 @@ division.addEventListener("click", () => {
 // Adds an event listener to each number button to display it's number value
 for (let i = 0; i < buttons.length - 10; i++) {
     buttons[i].addEventListener('click', () => {
-        inputBox.value += i;
+        if (inputBox.value.length === 10) {
+            inputBox.value += "";
+        } else {
+            inputBox.value += i;
+        }
     })
 }
 
@@ -92,22 +96,32 @@ function toDecimal() {
 
 // Changes numbers to percents in decimal form eg: 5 = .05 && 500 = 5
 function toPercentValue() {
+    isDecimal = inputBox.value.includes(".");
     if (inputBox.value.length === 0) {
         return;
-    } else if (inputBox.value.length === 1) {
-        initialValue = inputBox.value;
-        inputBox.value = "";
-        inputBox.value += "0";
-        inputBox.value += initialValue;
-        inputBox.value += ".";
-    } else if (inputBox.value.length === 2) {
-        numberArray = inputBox.value.split("");
-        numberArray.splice(2, 0, ".");
-        inputBox.value = numberArray.join("");
-    } else {
+    } else if (inputBox.value.length === 1 && isDecimal === false) {
+        inputBox.value = "." + "0" + inputBox.value;
+    } else if (inputBox.value.length === 2 && isDecimal === false) {
+        inputBox.value = "." + inputBox.value;
+    } else if (inputBox.value.length > 2 && isDecimal === false) {
         numberArray = inputBox.value.split("");
         numberArray.splice(-2, 0, ".");
         inputBox.value = numberArray.join("");
+    } else {
+        numberArray = inputBox.value.split("");
+        let indexOfDecimalPoint = numberArray.indexOf(".");
+
+        if (indexOfDecimalPoint === 0) {
+            numberArray.splice(1, 0, "0", "0");
+            inputBox.value = numberArray.join("");
+        } else if (indexOfDecimalPoint === 1) {
+            delete numberArray[indexOfDecimalPoint];
+            inputBox.value = ".0" + numberArray.join("");
+        } else {
+            delete numberArray[indexOfDecimalPoint];
+            numberArray.splice(indexOfDecimalPoint - 2, 0, ".");
+            inputBox.value = numberArray.join("");
+        }
     }
 }
 
@@ -125,6 +139,8 @@ function emptyInputBox() {
 function grabNumbers() {
     if (inputBox.value === "" && inputBox.placeholder === "") {
         return;
+    } else if (midOperation === false && operator === 0) {
+        return;
     } else if (midOperation === false && inputBox.placeholder === "") {
         currentNumber = inputBox.value
         emptyInputBox();
@@ -137,7 +153,6 @@ function grabNumbers() {
     } else {
         displayedNumber = inputBox.value;
         operate();
-
     }
 }
 
