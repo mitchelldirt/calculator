@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
     <link rel="stylesheet" href="styles.css">
     <title>Calculator</title>
 </head>
 <main>
     <div id="mainGrid">
         <section id="legend1">
-            <h2>fdsfs</h2>
-            <ul>
+            <ul id="ul2">
+                <li>Clear: <span class="kbc-button">Esc</span></li>
+                <li>Backspace: <span class="kbc-button">Backspace</span> OR <span class="kbc-button">Del</span></li>
+                <li>Negative: <span class="kbc-button">W</span> OR <span class="kbc-button">S</span> OR <span class="kbc-button">UpArrow</span> OR <span class="kbc-button">DownArrow</span></li>
+                <li>Division: <span class="kbc-button">/</span></li>
             </ul>
         </section>
+        <section id="calculator-container">
         <section id="calculator-grid">
             <h1 id="title">Calculator</h1>
             <!--Don't move the number buttons around; that will break the JS :(-->
@@ -29,8 +32,12 @@
             <button class="btn" value="8" id="eight">8</button>
             <button class="btn" value="9" id="nine">9</button>
             <input placeholder="" type="text" name="output" id="output" value="">
-            <button class="btn" type="reset" id="clear">AC</button>
-            <button class="btn" id="positiveNegative">+/-</button>
+            <button class="btn" type="reset" id="clear">
+                <p>AC</p>
+            </button>
+            <button class="btn" id="positiveNegative">
+                <p>+/-</p>
+            </button>
             <button class="btn" id="percent">%</button>
             <button class="btn" id="division">/</button>
             <button class="btn" id="multiplication">X</button>
@@ -42,9 +49,13 @@
             <p id="footer">Made By Mitchell Mudd | <a target="_blank"
                     href="https://github.com/mitchelldirt/calculator">Source code</a></p>
         </section>
+    </section>
         <section id="legend2">
-            <h2>fdsfsf</h2>
             <ul>
+                <li>Multiplication: <span class="kbc-button">x</span> OR <span class="kbc-button">*</span></li>
+                <li>Subtraction: <span class="kbc-button">-</span></li>
+                <li>Addition: <span class="kbc-button">+</span></li>
+                <li>Equals: <span class="kbc-button">=</span> OR <span class="kbc-button">Enter</span></li>
             </ul>
         </section>
     </div>
