@@ -6,6 +6,18 @@
 5. Add your media queries
 */
 
+:root {
+  --orange-btn: #ff9e0a;
+  --lightGray-btn: #a5a5a5;
+  --darkGray-btn: #333333;
+}
+
+button {
+  height: 60px;
+  width: 60px;
+  justify-self: center;
+}
+
 html {
   background-color: black;
 }
@@ -13,23 +25,40 @@ html {
 #calculator-grid {
   display: grid;
   width: 300px;
-  height: 500px;
+  height: 550px;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(7, 1fr);
   grid-template-areas:
+    "title title title title"
     "output output output output"
     "output output output output"
     "clear delete positiveNegative division"
     "seven eight nine multiplication"
     "four five six minus"
     "one two three plus"
-    "numberZero percent changeToDecimal equals";
+    "numberZero percent changeToDecimal equals"
+    "footer footer footer footer";
+}
+
+#title {
+  grid-area: title;
+  color: white;
+  font-size: 1.75em;
+  line-height: 0px;
 }
 
 #output {
   grid-area: output;
   direction: ltr;
   text-align: right;
+  border: 3px solid black;
+  border-radius: 50% 20% / 10% 40%;
+  font-size: 1.3em;
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  bottom: 15px;
+  position: relative;
 }
 
 #clear {
@@ -106,4 +135,15 @@ html {
 
 #equals {
   grid-area: equals;
+}
+
+#footer {
+  grid-area: footer;
+  color: white;
+  font-size: 0.95em;
+}
+
+.btn {
+  border: 1px solid black;
+  border-radius: 50%;
 }

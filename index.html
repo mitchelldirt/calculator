@@ -10,28 +10,31 @@
 <main>
     <center>
         <section id="calculator-grid">
+            <h1 id="title">iPhone Calculator</h1>
             <!--Don't move the number buttons around; that will break the JS :(-->
-            <button value="0" id="numberZero">0</button>
-            <button value="1" id="one">1</button>
-            <button value="2" id="two">2</button>
-            <button value="3" id="three">3</button>
-            <button value="4" id="four">4</button>
-            <button value="5" id="five">5</button>
-            <button value="6" id="six">6</button>
-            <button value="7" id="seven">7</button>
-            <button value="8" id="eight">8</button>
-            <button value="9" id="nine">9</button>
+            <button class="btn" value="0" id="numberZero">0</button>
+            <button class="btn" value="1" id="one">1</button>
+            <button class="btn" value="2" id="two">2</button>
+            <button class="btn" value="3" id="three">3</button>
+            <button class="btn" value="4" id="four">4</button>
+            <button class="btn" value="5" id="five">5</button>
+            <button class="btn" value="6" id="six">6</button>
+            <button class="btn" value="7" id="seven">7</button>
+            <button class="btn" value="8" id="eight">8</button>
+            <button class="btn" value="9" id="nine">9</button>
             <input placeholder="" type="text" name="output" id="output" value="">
-            <button type="reset" id="clear">CLEAR</button>
-            <button id="positiveNegative">+/-</button>
-            <button id="percent">%</button>
-            <button id="division">/</button>
-            <button id="multiplication">X</button>
-            <button id="minus">-</button>
-            <button id="plus">+</button>
-            <button id="changeToDecimal">.</button>
-            <button id="equals">=</button>
-            <button id="delete">DELETE</button>
+            <button class="btn" type="reset" id="clear">AC</button>
+            <button class="btn" id="positiveNegative">+/-</button>
+            <button class="btn" id="percent">%</button>
+            <button class="btn" id="division">/</button>
+            <button class="btn" id="multiplication">X</button>
+            <button class="btn" id="minus">-</button>
+            <button class="btn" id="plus">+</button>
+            <button class="btn" id="changeToDecimal">.</button>
+            <button class="btn" id="equals">=</button>
+            <button class="btn" id="delete">C</button>
+            <p id="footer">Made By Mitchell Mudd | Source code</p>
+
         </section>
     </center>
     <script src="./script.js"></script>
