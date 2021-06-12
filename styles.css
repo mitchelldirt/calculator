@@ -1,28 +1,53 @@
 /*TODO:
-1. Add in a legend for which buttons do what operations and a footer (Made by in 2021...... Odin project)
+1. Add in a legend for which buttons do what operations and a footer (Made by in 2021...... Odin project) DO THIS AT 1025px wide
 2. Change the sizing to be what you want
 3. Align everything
 4. Change the colors
 5. Add your media queries
 */
-
+@import url('https://fonts.googleapis.com/css2?family=Poller+One&family=Share+Tech+Mono&display=swap');
 :root {
   --orange-btn: #ff9e0a;
   --lightGray-btn: #a5a5a5;
   --darkGray-btn: #333333;
 }
 
+a {
+  color: var(--orange-btn);
+}
+
 button {
   height: 60px;
   width: 60px;
   justify-self: center;
+  color: white;
+  font-size: 1.5em;
+  font-family: 'Share Tech Mono', Georgia, 'Times New Roman', Times, serif;
 }
 
 html {
-  background-color: black;
+  background-color: whitesmoke;
+  overflow: hidden;
+  font-family: 'Poller One', Georgia, 'Times New Roman', Times, serif;
 }
 
+.main-grid {
+  display: flex
+
+}
+
+#legend1 {
+  visibility: hidden;
+}
+
+#legend2 {
+  visibility: hidden;
+  color: white
+}
 #calculator-grid {
+  background-color: black;
+  border: 3px solid black;
+  border-radius: 25px;
   display: grid;
   width: 300px;
   height: 550px;
@@ -42,7 +67,7 @@ html {
 
 #title {
   grid-area: title;
-  color: white;
+  color: var(--orange-btn);
   font-size: 1.75em;
   line-height: 0px;
 }
@@ -51,96 +76,125 @@ html {
   grid-area: output;
   direction: ltr;
   text-align: right;
-  border: 3px solid black;
-  border-radius: 50% 20% / 10% 40%;
-  font-size: 1.3em;
   width: 100%;
-  word-wrap: break-word;
-  word-break: break-all;
   bottom: 15px;
   position: relative;
+  background-color: black;
+  color: white;
+  font-size: 3em;
+  word-break: break-all;
+  border: black;
+  line-break: loose;
+  font-family: 'Share Tech Mono', Georgia, 'Times New Roman', Times, serif;
 }
 
 #clear {
   grid-area: clear;
+  background-color: var(--lightGray-btn);
+  color: black;
 }
 
 #positiveNegative {
   grid-area: positiveNegative;
+  background-color: var(--lightGray-btn);
+  color: black;
+}
+
+#delete {
+  grid-area: delete;
+  background-color: var(--lightGray-btn);
+  color: black;
 }
 
 #percent {
   grid-area: percent;
+  background-color: var(--darkGray-btn);
 }
 
 #division {
   grid-area: division;
+  background-color: var(--orange-btn);
 }
 
 #seven {
   grid-area: seven;
+  background-color: var(--darkGray-btn);
 }
 
 #eight {
   grid-area: eight;
+  background-color: var(--darkGray-btn);
 }
 
 #nine {
   grid-area: nine;
+  background-color: var(--darkGray-btn);
 }
 
 #multiplication {
   grid-area: multiplication;
+  background-color: var(--orange-btn);
 }
 
 #four {
   grid-area: four;
+  background-color: var(--darkGray-btn);
 }
 
 #five {
   grid-area: five;
+  background-color: var(--darkGray-btn);
 }
 
 #six {
   grid-area: six;
+  background-color: var(--darkGray-btn);
 }
 
 #minus {
   grid-area: minus;
+  background-color: var(--orange-btn);
 }
 
 #one {
   grid-area: one;
+  background-color: var(--darkGray-btn);
 }
 
 #two {
   grid-area: two;
+  background-color: var(--darkGray-btn);
 }
 
 #three {
   grid-area: three;
+  background-color: var(--darkGray-btn);
 }
 
 #plus {
   grid-area: plus;
+  background-color: var(--orange-btn);
 }
 
 #numberZero {
   grid-area: numberZero;
+  background-color: var(--darkGray-btn);
 }
 
 #changeToDecimal {
   grid-area: changeToDecimal;
+  background-color: var(--darkGray-btn);
 }
 
 #equals {
   grid-area: equals;
+  background-color: var(--orange-btn);
 }
 
 #footer {
   grid-area: footer;
   color: white;
-  font-size: 0.95em;
+  font-size: 0.8em;
 }
 
 .btn {

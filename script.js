@@ -149,11 +149,18 @@ function grabNumbers() {
 };
 
 // All of the operator functions below will round to the 5th decimal place. eg: .00005
+// Results will convert to exponent after the length exceeds 10 digits.
 function add(x, y) {
     x = parseFloat(x);
     y = parseFloat(y);
     let result = x + y;
     result = Math.round((result + Number.EPSILON) * 100000) / 100000;
+    let resultLength = result.toString().length;
+    if (resultLength <= 10) {
+        result = result;
+    } else {
+        result = result.toExponential(5);
+    }
     currentNumber = result;
     inputBox.value = "";
     inputBox.placeholder = result;
@@ -165,6 +172,12 @@ function subtract(x, y) {
     y = parseFloat(y);
     let result = x - y;
     result = Math.round((result + Number.EPSILON) * 100000) / 100000;
+    let resultLength = result.toString().length;
+    if (resultLength <= 10) {
+        result = result;
+    } else {
+        result = result.toExponential(5);
+    }
     currentNumber = result;
     inputBox.value = "";
     inputBox.placeholder = result;
@@ -176,6 +189,12 @@ function multiply(x, y) {
     y = parseFloat(y);
     let result = x * y;
     result = Math.round((result + Number.EPSILON) * 100000) / 100000;
+    let resultLength = result.toString().length;
+    if (resultLength <= 10) {
+        result = result;
+    } else {
+        result = result.toExponential(5);
+    }
     currentNumber = result;
     inputBox.value = "";
     inputBox.placeholder = result;
@@ -195,6 +214,12 @@ function divide(x, y) {
     } else {
         let result = x / y;
         result = Math.round((result + Number.EPSILON) * 100000) / 100000;
+        let resultLength = result.toString().length;
+        if (resultLength <= 10) {
+            result = result;
+        } else {
+            result = result.toExponential(5);
+        }
         currentNumber = result;
         inputBox.value = "";
         inputBox.placeholder = result;
