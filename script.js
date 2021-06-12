@@ -312,6 +312,8 @@ window.addEventListener("keydown", function (event) {
             break;
         case "ArrowUp":
         case "ArrowDown":
+        case "KeyW":
+        case "KeyS":
             positiveToNegative();
             break;
         case "Period":
