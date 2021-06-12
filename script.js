@@ -1,7 +1,5 @@
 /* TODO: 
-1. Add in keyboard support
 4. Organize and comment all of your code.
-5. CSS Time baby.
 */
 const inputBox = document.getElementById("output");
 const clearButton = document.getElementById("clear");
@@ -30,25 +28,28 @@ equals.addEventListener("click", () => {
     midOperation = false;
 });
 
-addition.addEventListener("click", grabNumbers);
 addition.addEventListener("click", () => {
     operator = 1;
 })
+addition.addEventListener("click", grabNumbers);
 
-subtraction.addEventListener("click", grabNumbers);
+
 subtraction.addEventListener("click", () => {
     operator = 2;
 })
+subtraction.addEventListener("click", grabNumbers);
 
-multiplication.addEventListener("click", grabNumbers);
+
 multiplication.addEventListener("click", () => {
     operator = 3;
 })
+multiplication.addEventListener("click", grabNumbers);
 
-division.addEventListener("click", grabNumbers);
 division.addEventListener("click", () => {
     operator = 4;
 })
+division.addEventListener("click", grabNumbers);
+
 
 // Adds an event listener to each number button to display it's number value
 for (let i = 0; i < buttons.length - 10; i++) {
@@ -137,7 +138,7 @@ function emptyInputBox() {
 }
 
 function grabNumbers() {
-    if (inputBox.value === "" && inputBox.placeholder === "") {
+    if (inputBox.value === "" && inputBox.placeholder === "" && operator === 0) {
         return;
     } else if (midOperation === false && operator === 0) {
         return;
@@ -150,6 +151,9 @@ function grabNumbers() {
         currentNumber = inputBox.placeholder;
         midOperation = true;
         return;
+    } else if (midOperation === true && inputBox.value === "") {
+        displayedNumber = currentNumber;
+        operate();
     } else {
         displayedNumber = inputBox.value;
         operate();
@@ -209,10 +213,12 @@ function divide(x, y) {
 }
 
 function operate() {
-    if (currentNumber === "" || currentNumber === "0") {
-        inputBox.value = currentNumber;
+    if (currentNumber === "" || currentNumber === "0" || displayedNumber === "") {
+        inputBox.placeholder = currentNumber;
     } else {
         switch (operator) {
+            case 0:
+                return;
             case 1:
                 add(currentNumber, displayedNumber)
                 break;
@@ -274,8 +280,12 @@ window.addEventListener("keydown", function (event) {
             seven.click();
             break;
         case "Digit8":
-            const eight = document.getElementById("eight");
-            eight.click();
+            if (event.key === "*") {
+                multiplication.click();
+            } else {
+                const eight = document.getElementById("eight");
+                eight.click();
+            }
             break;
         case "Digit9":
             const nine = document.getElementById("nine");
@@ -287,6 +297,30 @@ window.addEventListener("keydown", function (event) {
         case "ArrowUp":
         case "ArrowDown":
             positiveToNegative();
+            break;
+        case "Period":
+            toDecimal();
+            break;
+        case "Backspace":
+        case "Delete":
+            backSpace();
+            break;
+        case "Equal":
+        case "Enter":
+            if (event.key === "+") {
+                addition.click();
+            } else {
+                equals.click();
+            }
+            break;
+        case "KeyX":
+            multiplication.click();
+            break;
+        case "Minus":
+            subtraction.click();
+            break;
+        case "Slash":
+            division.click();
             break;
     }
     // Consume the event so it doesn't get handled twice
