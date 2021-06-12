@@ -1,5 +1,5 @@
 /* TODO: 
-1. Add in keyboard support and disable the typing in the text box.
+1. Add in keyboard support
 4. Organize and comment all of your code.
 5. CSS Time baby.
 */
@@ -29,12 +29,6 @@ equals.addEventListener("click", grabNumbers);
 equals.addEventListener("click", () => {
     midOperation = false;
 });
-
-inputBox.addEventListener("input", () => {
-    if (inputBox.value === 10) {
-
-    }
-})
 
 addition.addEventListener("click", grabNumbers);
 addition.addEventListener("click", () => {
@@ -87,8 +81,10 @@ function toDecimal() {
     if (isDecimal === true) {
         return;
     } else if (isDecimal === false) {
-        let decimalPoint = ".";
-        inputBox.value = inputBox.value + decimalPoint;
+        initialValue = inputBox.value;
+        inputBox.value = "";
+        inputBox.value += initialValue;
+        inputBox.value += ".";
     } else {
         alert("An error related to the decimal point button has occurred");
     }
@@ -99,11 +95,19 @@ function toPercentValue() {
     if (inputBox.value.length === 0) {
         return;
     } else if (inputBox.value.length === 1) {
-        inputBox.value = ".0" + inputBox.value;
+        initialValue = inputBox.value;
+        inputBox.value = "";
+        inputBox.value += "0";
+        inputBox.value += initialValue;
+        inputBox.value += ".";
+    } else if (inputBox.value.length === 2) {
+        numberArray = inputBox.value.split("");
+        numberArray.splice(2, 0, ".");
+        inputBox.value = numberArray.join("");
     } else {
         numberArray = inputBox.value.split("");
         numberArray.splice(-2, 0, ".");
-        inputBox.value = numberArray.join("")
+        inputBox.value = numberArray.join("");
     }
 }
 
@@ -211,3 +215,65 @@ function operate() {
         }
     }
 }
+
+window.addEventListener("keydown", function (event) {
+    if (event.defaultPrevented) {
+        return; // Do nothing if event already handled
+    }
+
+    switch (event.code) {
+        case "Digit0":
+            const zero = document.getElementById("numberZero");
+            zero.click();
+            break;
+        case "Digit1":
+            const one = document.getElementById("one");
+            one.click();
+            break;
+        case "Digit2":
+            const two = document.getElementById("two");
+            two.click();
+            break;
+        case "Digit3":
+            const three = document.getElementById("three");
+            three.click();
+            break;
+        case "Digit4":
+            const four = document.getElementById("four");
+            four.click();
+            break;
+        case "Digit5":
+            if (event.key === "%") {
+                toPercentValue();
+            } else {
+                const five = document.getElementById("five");
+                five.click();
+            }
+            break;
+        case "Digit6":
+            const six = document.getElementById("six");
+            six.click();
+            break;
+        case "Digit7":
+            const seven = document.getElementById("seven");
+            seven.click();
+            break;
+        case "Digit8":
+            const eight = document.getElementById("eight");
+            eight.click();
+            break;
+        case "Digit9":
+            const nine = document.getElementById("nine");
+            nine.click();
+            break;
+        case "Escape":
+            clearInput();
+            break;
+        case "ArrowUp":
+        case "ArrowDown":
+            positiveToNegative();
+            break;
+    }
+    // Consume the event so it doesn't get handled twice
+    event.preventDefault();
+}, true);
