@@ -264,6 +264,27 @@ li {
   transition: all 0.25s cubic-bezier(0.2, 1, 0.2, 1);
 }
 
+@media screen and (orientation: landscape) and (max-width: 900px) {
+  #calculator-grid {
+    height: 300px;
+    width: 500px;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    grid-template-areas:
+      "title title title title title title title"
+      "output output output output output output output"
+      "output output output output output output output"
+      "delete positiveNegative plus minus multiplication division equals"
+      "clear percent changeToDecimal numberZero one two three"
+      "four five six seven eight nine nine"
+      "footer footer footer footer footer footer footer";
+  }
+  button {
+    width: 50px;
+    height: 50px;
+  }
+}
+
 @media screen and (min-width: 1250px) {
   #legend1 {
     width: 25%;

@@ -56,7 +56,7 @@ division.addEventListener("click", grabNumbers);
 // Adds an event listener to each number button to display it's number value.
 for (let i = 0; i < buttons.length - 10; i++) {
     buttons[i].addEventListener("click", () => {
-        if (inputBox.value.length === 10) {
+        if (inputBox.value.length === 9) {
             inputBox.value += "";
         } else {
             inputBox.value += i;
@@ -156,10 +156,10 @@ function add(x, y) {
     let result = x + y;
     result = Math.round((result + Number.EPSILON) * 100000) / 100000;
     let resultLength = result.toString().length;
-    if (resultLength <= 10) {
+    if (resultLength <= 9) {
         result = result;
     } else {
-        result = result.toExponential(5);
+        result = result.toExponential(3);
     }
     currentNumber = result;
     inputBox.value = "";
@@ -173,10 +173,10 @@ function subtract(x, y) {
     let result = x - y;
     result = Math.round((result + Number.EPSILON) * 100000) / 100000;
     let resultLength = result.toString().length;
-    if (resultLength <= 10) {
+    if (resultLength <= 9) {
         result = result;
     } else {
-        result = result.toExponential(5);
+        result = result.toExponential(3);
     }
     currentNumber = result;
     inputBox.value = "";
@@ -190,10 +190,10 @@ function multiply(x, y) {
     let result = x * y;
     result = Math.round((result + Number.EPSILON) * 100000) / 100000;
     let resultLength = result.toString().length;
-    if (resultLength <= 10) {
+    if (resultLength <= 9) {
         result = result;
     } else {
-        result = result.toExponential(5);
+        result = result.toExponential(3);
     }
     currentNumber = result;
     inputBox.value = "";
@@ -215,10 +215,10 @@ function divide(x, y) {
         let result = x / y;
         result = Math.round((result + Number.EPSILON) * 100000) / 100000;
         let resultLength = result.toString().length;
-        if (resultLength <= 10) {
+        if (resultLength <= 9) {
             result = result;
         } else {
-            result = result.toExponential(5);
+            result = result.toExponential(3);
         }
         currentNumber = result;
         inputBox.value = "";
